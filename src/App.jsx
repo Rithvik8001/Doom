@@ -1,11 +1,15 @@
 import React from "react";
-import Logo from "./Logo";
+import Navbar from "./components/nav";
 
 export default function App() {
   return (
     <>
-      <div>
-        <Logo width={80} height={80} />
+      <div className="bg-gray-50">
+        <div className="p-4">
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+          </div>
+        </div>
       </div>
     </>
   );
