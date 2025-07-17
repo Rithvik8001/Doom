@@ -1,38 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "./avatar";
 import { Link } from "react-router-dom";
 import Logo from "./logo";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Handles toggling the mobile menu
+  const toggleMenu = () => setMenuOpen((open) => !open);
+
   return (
-    <>
-      <div className="bg-white p-2 border-2 border-gray-200">
-        <nav className="flex justify-between items-center">
-          <div className="flex items-center flex-1">
-            <Logo />
+    // Responsive header: more padding on desktop, less on mobile
+    <header className="mx-2 sm:mx-0 border-2 border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-50 mt-4 px-2 py-2 sm:px-6 sm:py-4">
+      <nav className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0 relative w-full">
+        {/* Logo and burger menu section */}
+        <div className="flex items-center w-full sm:w-auto justify-between">
+          <div className="flex items-center">
+            <Logo width={36} height={36} />
+            <span className="ml-2 text-xl sm:text-2xl font-bold tracking-tight text-black select-none">
+              Doom
+            </span>
           </div>
-          <ul className="flex items-center space-x-8 mr-4">
-            <Link to={"/signup"}>
-              <button className="py-1.5 px-7 border-black border-2 cursor-pointer">
-                Register
+          {/* Burger menu button (visible on mobile only) */}
+          <button
+            className="sm:hidden ml-auto p-2 focus:outline-none z-50 rounded-md hover:bg-gray-100 transition-colors"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={toggleMenu}
+          >
+            {menuOpen ? (
+              <X size={32} strokeWidth={2.5} />
+            ) : (
+              <Menu size={32} strokeWidth={2.5} />
+            )}
+          </button>
+        </div>
+        {/* Desktop nav */}
+        <ul className="hidden sm:flex flex-row items-center gap-3 w-full sm:w-auto justify-end">
+          <li>
+            <Link to="/signup">
+              <button className="bg-black text-white px-6 py-2 hover:bg-gray-900 transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 cursor-pointer">
+                Sign Up
               </button>
             </Link>
-            <Link to={"/login"}>
-              <button className="py-1.5 px-7 border-2 border-black cursor-pointer">
-                Login
+          </li>
+          <li>
+            <Link to="/login">
+              <button className="bg-white text-black border border-black px-6 py-2 font-medium hover:bg-gray-100 transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 cursor-pointer">
+                Log In
               </button>
             </Link>
-            <li>
-              <Avatar
-                alt={"avatar"}
-                src={"https://github.com/evilrabbit.png"}
-                size="small"
-              />
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </>
+          </li>
+          <li className="ml-2">
+            <Avatar
+              alt={"avatar"}
+              src={"https://github.com/evilrabbit.png"}
+              size="small"
+            />
+          </li>
+        </ul>
+        {/* Mobile full-screen menu overlay */}
+        {menuOpen && (
+          <div className="fixed inset-0 bg-white z-40 flex flex-col justify-center items-center w-screen h-screen px-4">
+            <ul className="flex flex-col items-center gap-8 text-2xl font-semibold w-full max-w-xs">
+              <li className="w-full">
+                <Link to="/signup">
+                  <button className="bg-black text-white border border-black px-6 py-2 font-medium hover:bg-gray-700 transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 cursor-pointer w-full">
+                    Sign Up
+                  </button>
+                </Link>
+              </li>
+              <li className="w-full">
+                <Link to="/login">
+                  <button className="bg-white text-black border border-black px-6 py-2 font-medium hover:bg-gray-100 transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black/30 cursor-pointer w-full">
+                    Log In
+                  </button>
+                </Link>
+              </li>
+              <li className="w-full flex justify-center mt-4">
+                <Avatar
+                  alt={"avatar"}
+                  src={"https://github.com/evilrabbit.png"}
+                  size="large"
+                />
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 };
 
