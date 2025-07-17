@@ -1,26 +1,27 @@
 import React from "react";
-import icon from "../assets/icon.svg";
 import Avatar from "./avatar";
+import { Link } from "react-router-dom";
+import Logo from "./logo";
 
 const Navbar = () => {
   return (
     <>
-      <div className="bg-white p-2 border-3 border-black">
+      <div className="bg-white p-2 border-2 border-gray-200">
         <nav className="flex justify-between items-center">
           <div className="flex items-center flex-1">
-            <img width={44} height={54} src={icon} alt="icon" />
-            <h1 className="tracking-tighter font-medium text-4xl ml-2">Doom</h1>
+            <Logo />
           </div>
           <ul className="flex items-center space-x-8 mr-4">
-            <li className="hover:text-gray-600 transition-colors cursor-pointer">
-              Home
-            </li>
-            <li className="hover:text-gray-600 transition-colors cursor-pointer">
-              About
-            </li>
-            <li className="hover:text-gray-600 transition-colors cursor-pointer">
-              Sign up
-            </li>
+            <Link to={"/signup"}>
+              <button className="py-1.5 px-7 border-black border-2 cursor-pointer">
+                Register
+              </button>
+            </Link>
+            <Link to={"/login"}>
+              <button className="py-1.5 px-7 border-2 border-black cursor-pointer">
+                Login
+              </button>
+            </Link>
             <li>
               <Avatar
                 alt={"avatar"}

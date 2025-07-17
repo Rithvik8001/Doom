@@ -1,16 +1,17 @@
 import React from "react";
-import Navbar from "./components/nav";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/home";
+import Signup from "./components/sign-up";
+import Login from "./components/login";
 
 export default function App() {
   return (
     <>
-      <div className="bg-gray-50">
-        <div className="p-4">
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 }
