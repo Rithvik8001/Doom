@@ -9,7 +9,7 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen((open) => !open);
 
   return (
-    <header className="mx-2 border border-black bg-white/80 backdrop-blur-md sticky top-0 z-50 mt-4 px-2 py-2 sm:px-6 sm:py-4">
+    <header className="mx-2 border border-black bg-white/80 backdrop-blur-2xl sticky top-0 z-50 mt-4 px-2 py-2 sm:px-6 sm:py-4">
       <nav className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0 relative w-full">
         <div className="flex items-center w-full sm:w-auto justify-between">
           <div className="flex items-center">
@@ -26,9 +26,9 @@ const Navbar = () => {
             onClick={toggleMenu}
           >
             {menuOpen ? (
-              <X size={32} strokeWidth={2.5} />
+              <X className="cursor-pointer" size={32} strokeWidth={2.5} />
             ) : (
-              <Menu size={32} strokeWidth={2.5} />
+              <Menu className="cursor-pointer" size={32} strokeWidth={2.5} />
             )}
           </button>
         </div>
