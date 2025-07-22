@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = ({
+  handleLogin,
+  emailId,
+  password,
+  setEmailId,
+  setPassword,
+}) => {
   return (
     <>
       <h1 className="text-center text-4xl ">
@@ -10,10 +16,23 @@ const LoginForm = () => {
       <div className="flex flex-col">
         <div className="p-2 mt-4 flex flex-col space-y-1">
           <label>Email</label>
-          <input className="w-full border-black border p-1.5" />
+          <input
+            type="text"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
+            className="w-full border-black border p-1.5"
+          />
           <label>Password</label>
-          <input className="w-full border-black border p-1.5" />
-          <button className="mt-2 p-2 bg-black text-white cursor-pointer">
+          <input
+            type="text"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border-black border p-1.5"
+          />
+          <button
+            onClick={handleLogin}
+            className="mt-2 p-2 bg-black text-white cursor-pointer"
+          >
             Login to Doom
           </button>
           <Link to={"/signup"}>

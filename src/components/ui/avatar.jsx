@@ -20,16 +20,15 @@ const Avatar = ({ src, alt, size = "medium", initials }) => {
 
   return (
     <div className={combinedClasses}>
-      {src ? ( // If 'src' (image source) is provided
+      {src ? (
         <img
           src={src}
-          alt={alt || "User Avatar"} // Use provided alt text or a default
-          className="w-full h-full object-cover" // Ensure image covers the container
+          alt={alt || "User Avatar"}
+          className="w-full h-full object-cover cursor-pointer"
         />
-      ) : initials ? ( // If 'initials' are provided (and no src)
-        <span>{initials.substring(0, 2).toUpperCase()}</span> // Display up to 2 uppercase initials
+      ) : initials ? (
+        <span>{initials.substring(0, 2).toUpperCase()}</span>
       ) : (
-        // Fallback: if neither src nor initials are provided
         <svg
           className="w-2/3 h-2/3 text-gray-500"
           fill="currentColor"
