@@ -12,10 +12,18 @@ import useAuthUser from "./hooks/useAuthUser";
 import Loading from "./pages/ui/loading";
 
 function AppWithAuth() {
-  const { user, loading } = useAuthUser();
+  const { user, loading, error } = useAuthUser();
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <div style={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
+        Error: {error}
+      </div>
+    );
   }
 
   return (

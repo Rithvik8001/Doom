@@ -3,19 +3,20 @@ import Avatar from "../ui/avatar";
 import { Link } from "react-router-dom";
 import Logo from "../ui/logo";
 import { Menu, X, User, LogOut } from "lucide-react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeUser } from "../../store/user";
+import { useSelector } from "react-redux";
+import useLogout from "../../hooks/useLogout";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popoverRef = useRef(null);
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { logout, error } = useLogout();
 
-  const handleLogout = () => {
-    dispatch(removeUser());
+  const handleLogout = async () => {
     setPopoverOpen(false);
+    setMenuOpen(false);
+    await logout();
   };
 
   const handleProfileClick = () => {
@@ -138,6 +139,17 @@ const Navbar = () => {
                       <LogOut className="h-4 w-4 text-gray-600" />
                       <span className="text-gray-700">Logout</span>
                     </button>
+                    {error && (
+                      <div
+                        style={{
+                          color: "red",
+                          fontSize: "0.9em",
+                          marginTop: 8,
+                        }}
+                      >
+                        {error}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -190,14 +202,22 @@ const Navbar = () => {
                       </button>
                       <button
                         className="flex items-center justify-center gap-2 p-3 rounded-md hover:bg-gray-100 transition-colors"
-                        onClick={() => {
-                          handleLogout();
-                          setMenuOpen(false);
-                        }}
+                        onClick={handleLogout}
                       >
                         <LogOut className="h-5 w-5" />
                         <span>Logout</span>
                       </button>
+                      {error && (
+                        <div
+                          style={{
+                            color: "red",
+                            fontSize: "0.9em",
+                            marginTop: 8,
+                          }}
+                        >
+                          {error}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </li>

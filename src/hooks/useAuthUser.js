@@ -7,6 +7,7 @@ export default function useAuthUser() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -16,8 +17,18 @@ export default function useAuthUser() {
           { withCredentials: true }
         );
         dispatch(addUser(response.data));
-      } catch {
+        setError(null);
+      } catch (err) {
         dispatch(addUser(null));
+        if (err?.response?.status !== 401) {
+          setError(
+            err?.response?.data?.message ||
+              err?.message ||
+              "Failed to fetch user profile."
+          );
+        } else {
+          setError(null);
+        }
       } finally {
         setLoading(false);
       }
@@ -25,5 +36,5 @@ export default function useAuthUser() {
     fetchUser();
   }, [dispatch]);
 
-  return { user, loading };
+  return { user, loading, error };
 }

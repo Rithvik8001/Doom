@@ -6,11 +6,9 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const Home = () => {
-  // Get user from global Redux state. If present, user is already authenticated.
   const user = useSelector((state) => state.user);
 
   if (user) {
-    // If user is authenticated, redirect to feed page
     return <Navigate to="/feed" />;
   }
   return (
