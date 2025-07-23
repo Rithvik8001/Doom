@@ -19,7 +19,7 @@ const Avatar = ({ src, alt, size = "medium", initials }) => {
   const combinedClasses = `${baseClasses} ${selectedSizeClass}`;
 
   return (
-    <div className={combinedClasses}>
+    <div className={combinedClasses} style={{ cursor: "pointer" }}>
       {src ? (
         <img
           src={src}
