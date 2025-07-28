@@ -5,22 +5,27 @@ import Logo from "../ui/logo";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { useSelector } from "react-redux";
 import useLogout from "../../hooks/useLogout";
-
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popoverRef = useRef(null);
   const user = useSelector((state) => state.user);
   const { logout, error } = useLogout();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     setPopoverOpen(false);
     setMenuOpen(false);
     await logout();
+    toast.success("Logged out successfully");
+    navigate("/login");
   };
 
   const handleProfileClick = () => {
     setPopoverOpen(false);
+    navigate("/profile");
   };
 
   useEffect(() => {
@@ -198,7 +203,9 @@ const Navbar = () => {
                         }}
                       >
                         <User className="h-5 w-5" />
-                        <span>Profile</span>
+                        <span onClick={() => navigate("/profile")}>
+                          Profile
+                        </span>
                       </button>
                       <button
                         className="flex items-center justify-center gap-2 p-3 rounded-md hover:bg-gray-100 transition-colors"

@@ -27,6 +27,7 @@ const Login = () => {
         }
       );
       dispatch(addUser(response.data.user));
+
       navigate("/feed");
     } catch (error) {
       if (error.response.status === 401) {

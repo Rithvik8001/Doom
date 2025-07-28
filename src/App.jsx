@@ -10,6 +10,7 @@ import store from "./store/store";
 import Feed from "./pages/feed/feed";
 import useAuthUser from "./hooks/useAuthUser";
 import Loading from "./pages/ui/loading";
+import Profile from "./pages/profile/profile";
 
 function AppWithAuth() {
   const { user, loading, error } = useAuthUser();
@@ -21,7 +22,7 @@ function AppWithAuth() {
   if (error) {
     return (
       <div style={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
-        Error: {error}
+        {error}
       </div>
     );
   }
@@ -37,6 +38,10 @@ function AppWithAuth() {
       <Route
         path="/feed"
         element={user ? <Feed /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/profile"
+        element={user ? <Profile /> : <Navigate to="/login" />}
       />
     </Routes>
   );
